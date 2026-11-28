@@ -1,6 +1,8 @@
 [Unit]
 Description=gunicorn daemon
-After=network.target
+# ROS 2 discovery needs the multicast route on lo, which multicast-loopback adds
+After=network.target multicast-loopback.service
+Wants=multicast-loopback.service
 
 [Service]
 # gunicorn can let systemd know when it is ready
